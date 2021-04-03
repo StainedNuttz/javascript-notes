@@ -1,6 +1,6 @@
-# Variables
+# Fundamentals
 
-## Declarations
+## Variable Declarations
 
 ### var
 
@@ -26,7 +26,7 @@ const item = ... // GOOD
 
 You can modify the properties of mutable `const` variables such as **arrays** and **objects**.
 
-Modifying the properties of mutable `const` variables doesn't involve reassigning the `const` itself, whereas reassigning a `const` would cause an error.
+Modifying the properties of mutable `const` variables doesn't involve reassigning the `const` itself. Whereas, reassigning a `const` itself will cause an error.
 
 ```js
 const a = 1;
@@ -46,7 +46,7 @@ With the above code, you can see how we are able to modify the data inside the a
 
 **JavaScript** is a dynamically typed language.
 Types are associated with values not variables.
-The same variable can hold multiple types, you do not define a type for the variable.
+The same variable can hold multiple types, you do not define a type for a variable.
 
 ### Static typed language
 
@@ -54,13 +54,13 @@ Languages such as **C#**, **Java** and **C++** require variables to have a type 
 
 There are supersets of **JavaScript** and addons which allow static typing such as **TypeScript** and **Flow**.
 
-## Primitive types
+### Primitive types
 
 Primitive data types are stored directly in the location that the variable accesses.
 
 They are stored on the stack because their sizes are **static**.
 
-### string
+#### string
 
 A sequence of characters
 
@@ -68,7 +68,7 @@ A sequence of characters
 const name = 'John Doe';
 ```
 
-### number
+#### number
 
 A generic number.  
 Can be a float, decimal, integer, etc.  
@@ -78,7 +78,7 @@ There is no separate data type for each!
 const age = 45;
 ```
 
-### boolean
+#### boolean
 
 Either true or false
 
@@ -86,7 +86,7 @@ Either true or false
 const hasKids = true;
 ```
 
-### null
+#### null
 
 An intentional empty value
 
@@ -96,7 +96,7 @@ console.log(typeof car)
 // returns 'object', which is a bug!
 ```
 
-### undefined
+#### undefined
 
 a declared variable that isn't initialized
 
@@ -104,7 +104,7 @@ a declared variable that isn't initialized
 let test;
 ```
 
-### symbol
+#### symbol
 
 A new primitive type introduced in ES6
 
@@ -112,7 +112,7 @@ A new primitive type introduced in ES6
 const sym = Symbol();
 ```
 
-## Reference types
+### Reference types
 
 Reference data types are **objects** that are accessed by reference. The variable stores a pointer to that actual data.  
 They are referred to as **objects**! Using `typeof` will always yield `object`.  
@@ -120,7 +120,7 @@ The **actual** data is stored on the heap because their sizes are **dynamic**.
 
 There are many different reference types, here are a few examples:
 
-### array
+#### array
 
 A collection of data
 
@@ -128,7 +128,7 @@ A collection of data
 const hobbies = ['movies', 'music'];
 ```
 
-### object
+#### object
 
 An object literal
 
@@ -139,7 +139,7 @@ const address = {
 }
 ```
 
-### function
+#### function
 
 We can reference a function using a variable.
 
@@ -173,7 +173,9 @@ An object type used to represent dates
 const today = Date();
 ```
 
-## Type Conversion
+## Converting Variables
+
+### Type Conversion
 
 Changing the data type of a variable can be useful.
 
@@ -181,7 +183,7 @@ One common case is storing a `<form>` input into a variable. By default, the var
 
 There a few ways for each type of conversion.
 
-### → string
+#### to string
 
 Use the `String()` method.
 
@@ -210,7 +212,7 @@ You can also use the `.toString()` method.
 val = (5).toString();
 ```
 
-### → number
+#### to number
 
 ```js
 let val = '5';
@@ -235,7 +237,7 @@ val = parseInt('100.52'); // 100
 val = parseFloat('100.52'); // 100.52
 ```
 
-## Type Coercion
+### Type Coercion
 
 Type conversion is where we take a value and convert it into another.
 
@@ -253,3 +255,173 @@ val3 = Number(val1 + val2); // 56 : number
 ```
 
 JavaScript sees that `val1` is a `string` and therefore decides to convert `val2` into a string aswell, so that the values can be concatenated into a new string.
+
+## The Math Library
+
+The Math library has many useful methods.
+
+```js
+let val;
+
+val = Math.PI; // 3.141...
+val = Math.E; // 2.718...
+val = Math.round(2.4); // 2
+val = Math.ceil(2.4); // 3
+val = Math.floor(2.8); // 2
+val = Math.sqrt(64); // 8
+val = Math.abs(-3); // 3
+val = Math.pow(5, 2); // 25
+val = Math.min(2, 33, 4, 1, 55, -6, 3); // -6
+val = Math.max(2, 33, 4, 1, 55, -6, 3); // 55
+
+val = Math.random(); // Random decimal between 0 and 1
+val = Math.floor(Math.random() * 100 + 1); // Random number between 1 and 100, rounded down to an integer
+```
+
+## String Methods
+
+### Simple Concatenation
+
+```js
+const firstName = 'William';
+const lastName = 'Johnson';
+let val;
+
+val = firstName + lastName; // WilliamJohnson
+val = firstName + ' ' + lastName // William Johnson 
+```
+
+### Appending
+
+```js
+val = 'Stian '; // Stian
+val += 'Hazelgrove'; // Stian Hazelgrove
+```
+
+### Escaping
+
+Escaping involves the `\` character.
+
+Escaping simply takes the power away from syntax characters, treating the character as a normal text character.
+
+This is useful because certain characters that define the JavaScript syntax, e.g. single quotes, can be escaped so that they act like a normal character in a string instead of ending the string like it normally would.
+
+```js
+val = 'That\'s awesome, I can\'t wait';
+```
+
+### .length
+
+```js
+val = firstName.length; // 7
+```
+
+### concat()
+
+```js
+val = firstName.concat(' ', lastName); // William Johnson
+```
+
+### Uppercase & Lowercase
+
+```js
+val = firstName.toUpperCase(); // WILLIAM
+val = firstName.toLowerCase(); // william
+```
+
+### Indexing Strings
+
+You can index strings like arrays
+
+```js
+val = firstName[0]; // W
+val = firstName[5]; // a
+```
+
+Strings are immutable so you cannot index a string to replace characters!
+
+```js
+val[5] = val[5].toUpperCase(); // stays as William
+// Desired effect: WilliAm
+```
+
+### indexOf()
+
+Character matching is case-sensitive.
+
+The `indexOf()` method returns `-1` if no such character exists.
+
+```js
+val = firstName.indexOf('W'); // 0
+val = firstName.indexOf('w'); // -1
+val = firstName.indexOf('l'); // 2 (first l in the string)
+val = firstName.lastIndexOf('l'); // 3 (last l in the string) 
+```
+
+### charAt()
+
+Similar to indexing the string.
+
+An out of range index results in an empty string.
+
+```js
+val = firstName.charAt('2'); // l
+val = firstName.charAt(2); // l
+val = firstName.charAt(10); // empty string
+val = firstName.charAt(firstName.length - 1); // m
+```
+
+### substring()
+
+Extracts a section of a string
+
+```js
+val = firstName.substring(0, 4); // Will
+```
+
+### slice()
+
+Similar to the `substring()` method, but can use negative numbers to get the last `n` characters.
+
+```js
+val = firstName.slice(0, 4); // Will
+val = firstName.slice(1); // illiam
+val = firstName.slice(-3); // iam
+```
+
+### split()
+
+Very useful method. Splits a string into an array using a separating identifier (usually spaces).
+
+```js
+const greeting = "Hello! My name is William."
+val = greeting.split(' '); // 0: Hello!
+                           // 1: My
+                           // 2: Name
+                           // 3: is
+                           // 4: William.
+
+val = greeting.split('!'); // 0: Hello
+                           // 1: My Name is William.
+```
+
+The identifier is excluded in the array.
+
+### replace()
+
+Simply replaces a substring with a new substring
+
+```js
+val = greeting.replace('William', 'Josef'); // Hello! My name is Josef
+```
+
+### includes()
+
+Returns whether the substring exists in a string
+
+```js
+val = greeting.includes('W'); // true
+val = greeting.includes('Wi'); // true
+val = greeting.includes('Wii'); // false
+val = greeting.includes('foo'); // false
+```
