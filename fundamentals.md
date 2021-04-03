@@ -1023,7 +1023,7 @@ window.console.log();
 window.document.getElementById();
 ```
 
-But we don't need the `window` as we are already at the top of `window` because it's the global object on the client.
+But we don't need the `window` as we are already at the top of `window` because it's the global object in the client.
 
 ### Window Methods
 
@@ -1150,7 +1150,6 @@ window.navigator.platform; // 'Linux x86_64'
 window.navigator.vendor; // ''
 window.navigator.language; // 'en-GB'
 ```
-
 
 ## Scopes
 
