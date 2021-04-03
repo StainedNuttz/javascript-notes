@@ -555,7 +555,7 @@ const numbers = [1, 2, 3, 4, 5];
 numbers.reverse(); // [5, 4, 3, 2, 1]
 ```
 
-### concat()
+#### concat()
 
 Concatenates arrays together
 
@@ -565,7 +565,7 @@ const numbers2 = [6, 7, 8, 9, 10];
 numbers1.concat(numbers2); // returns [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
 
-### sort()
+#### sort()
 
 ```js
 const names = ['Stian', 'Sandra', 'Josef', 'Rosi', 'Mario'];
@@ -620,8 +620,7 @@ val = numbers.sort(function(a, b) {
 
 `a - b` and `b - a` are the ones to remember
 
-
-### find()
+#### find()
 
 Finds the first value in an array, that satisfies the provided function.
 
@@ -760,13 +759,470 @@ Note how `February 31st` rolls over to `March 3rd`!
 
 ### Comparisons
 
+#### Equality
+
 `===` is preferred over `==` as it compares the type as well as the value, this stops issues from arising, e.g:
 
-`'100' == 100`
-> true
+```js
+'100' == 100
+// true
 
-`'100' === 100`
-> false
+'100' === 100
+// false
+```
 
-**Recommended** to use `===` !
+Use **===** and **!==**
 
+#### Undefined Checking
+
+In other languages you might want to check if a variable is `null` or undefined by just using:
+
+```txt
+if (id) {
+  print("ID!");
+} else {
+  print("NO ID!");
+}
+```
+
+In JavaScript, this shoots out an error.
+
+So instead, we check the type of the variable.
+
+```js
+if (typeof id !== 'undefined') {
+  console.log(`ID IS ${id}`);
+} else {
+  console.log('NO ID');
+}
+```
+
+#### Logical Operators
+
+The logical operators are defined as:
+
+* AND &&
+* OR ||
+
+#### Ternary Operator
+
+A shorthand for an IF statement:
+
+`(condition statement) ? value1 : value2`
+
+If the condition is true, return value1  
+Otherwise, return value2
+
+```js
+function calculatePrice(isMember) {
+  return isMember ? '$2.00' : '$10.00';
+}
+
+calculatePrice(true); // '$2.00'
+calculatePrice(false); // '$10.00'
+calculatePrice(null); // '$10.00'
+```
+
+### Switch Statements
+
+Switch statements are preferred over IF ELSE blocks.
+
+```js
+let day;
+
+switch(new Date().getDay()) {
+  case 0:
+    day = 'Sunday';
+    break;
+  case 1:
+    day = 'Monday';
+    break;
+  case 2:
+    day = 'Tuesday';
+    break;
+  case 3:
+    day = 'Wednesday';
+    break;
+  case 4:
+    day = 'Thursday';
+    break;
+  case 5:
+    day = 'Friday';
+    break;
+  case 6:
+    day = 'Saturday';
+    break;
+  default:
+    day = 'Payday';
+    break;
+}
+
+console.log(`Today is ${day}`);
+```
+
+A default case is met when no cases are met.
+
+## Functions
+
+### Function Declaration
+
+```js
+function functionName(a, b, c) {}
+```
+
+Avoid doing this for argument validation:
+
+```js
+function greet(firstName) {
+  if (typeof firstName === 'undefined') { firstName = 'John' }
+  return firstName;
+}
+```
+
+Do this instead:
+
+```js
+function greet(firstName = 'John') {
+  return firstName;
+}
+```
+
+### Function Expressions
+
+Function expressions have benefits over function declarations for more advanced things such as closures & hoisting.
+
+```js
+const square = function(x) {
+  return x * x
+};
+
+console.log(square(8)); // 64
+
+```
+
+An **anonymous** function is declared in the above code.
+
+### Immediately Invokable Function Expressions (IIFE's)
+
+Functions that are declared and called at the same time, very useful for the module design pattern.
+
+```js
+(function(name){
+  console.log('Hello ' + name);
+})('Stian');
+
+// 'Hello Stian'
+```
+
+### Functions in Objects
+
+```js
+const food = {
+  name: 'Apple',
+  eat: function(name = this.name) {
+    console.log('eating ' + name);
+  },
+  throw: function(name = this.name) {
+    console.log('throwing ' + name);
+  }
+}
+
+food.eat('Orange'); // 'eating Orange'
+food.throw(); // 'throwing Apple'
+
+food.pickUp = function(name = this.name) {
+  console.log('picking up ' + name);
+}
+
+food.pickUp(); // 'picking up Apple'
+```
+
+## Loops
+
+### Do While Loop
+
+Do while loops are similar to while loops, except that they always run **one** interation no matter what.
+
+```js
+let i = 100;
+
+do {
+  console.log('Number: ' + i);
+  i++;
+}
+
+while (i < 10);
+
+// OUTPUT: 'Number 100'
+```
+
+### Array.forEach()
+
+```js
+const people = ['John', 'Alex', 'Sandra', 'Max'];
+
+people.forEach(function(person) {
+  if (person !== 'Sandra') {
+    console.log('Person ' + person + ' is annoying');
+  }
+});
+```
+
+`forEach()` can take 3 arguments:
+
+```js
+Array.forEach(iterator, index, array);
+// iterator is the current value
+// index is the index of the current value
+// array is the entire array
+```
+
+### map()
+
+```js
+const users = [
+  { id: 1, name: 'Apple' },
+  { id: 2, name: 'Orange' },
+  { id: 3, name: 'Banana' } 
+];
+
+const ids = users.map(function(user) {
+  return user.id;
+});
+```
+
+### For in Loop
+
+Used for objects!
+
+```js
+const human = {
+  bones: true,
+  skin: true,
+  blood: true,
+  canFly: false,
+  lifeSpan: 70
+}
+
+for (let x in human) {
+  console.log(`${x} : ${human[x]}`);
+}
+```
+
+## The Window Object
+
+The global object in client-side JavaScript is the `window` object.
+
+`document` and `console` are apart of `window`
+
+We could use:
+
+```js
+window.alert();
+window.console.log();
+window.document.getElementById();
+```
+
+But we don't need the `window` as we are already at the top of `window` because it's the global object on the client.
+
+### Window Methods
+
+Old school methods, but `alert()` is still used.
+
+#### Alert
+
+```js
+alert('hello');
+```
+
+#### Prompt
+
+```js
+const input = prompt();
+alert(input);
+```
+
+#### Confirm
+
+```js
+if (confirm('Are you sure?')) {
+  console.log('yes');
+} else {
+  console.log('no');
+}
+```
+
+### Window Properties
+
+'window' has many useful properties we might want to use.
+
+#### Outer Height & Width
+
+Outer measurements are the browser window dimensions.
+
+```js
+window.outerHeight;
+window.outerWidth;
+```
+
+#### Inner Height & Width
+
+Inner measurements are the browser window dimensions **but** including any scrollbars, the dev tools menu, etc.
+
+```js
+window.innerHeight;
+window.innerWidth;
+```
+
+#### Scroll Points
+
+Scroll points are the positions you are on the scroll axis, useful for sites that have certain animations triggering at a certain scroll point threshold (usually scrollY).
+
+```js
+window.scrollY;
+window.scrollX;
+```
+
+### Location Object
+
+The location object contains values such as the hostname, port, URL search parameters, and much more!
+
+#### Various Location Properties
+
+Various properties that can be returned.
+
+```js
+window.location;
+window.location.hostname; // domain name
+window.location.port;
+window.location.href; // url
+window.location.search; // gets search parameters
+```
+
+#### location.href
+
+Redirects you to the entered URL.
+
+```js
+window.location.href = 'https://stianhazel.xyz';
+```
+
+#### location.reload()
+
+Reloads the page.
+
+```js
+window.location.reload();
+```
+
+The above method being used globally would cause the page to reload infinitely.
+
+### History Object
+
+Used to get browser history data.
+
+#### history.go()
+
+Redirects you to the `n`th url in the browser history stack.
+
+```js
+window.history.go(-2); // sends you 2 pages back
+```
+
+#### history.length
+
+Returns the browser history stack length
+
+```js
+window.history.length; // 6 (6 sites behind us)
+```
+
+### Navigator Object
+
+The `navigator` object contains data about the browser application, **not** the webpage.
+
+```js
+window.navigator;
+window.navigator.appName; // 'Netscape' (unless on IE)
+window.navigator.appVersion; // '5.0 (X11)'
+window.navigator.userAgent; // 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:87.0) Gecko/20100101 Firefox/87.0'
+window.navigator.platform; // 'Linux x86_64'
+window.navigator.vendor; // ''
+window.navigator.language; // 'en-GB'
+```
+
+
+## Scopes
+
+### Function Scopes
+
+Declared within a function
+
+```js
+// global scope
+var a = 1;
+let b = 2;
+const c = 3;
+
+function test() {
+  // function scope
+   var a = 4;
+   let b = 5;
+   const c = 6;
+   console.log(a, b, c);
+}
+test(); // 4 5 6
+console.log(a, b, c); // 1 2 3
+```
+
+`var`, `let` and `const` variables can be declared in the function scope, independent of the global scope.
+
+### Block Scopes
+
+Includes loops, if statements, switch statements
+
+```js
+var a = 1;
+let b = 2;
+const c = 3;
+
+if (true) {
+  // block scope
+  var a = 10;
+  let b = 20;
+  const c = 30;
+  console.log(a, b, c); // 10 20 30
+}
+
+console.log(a, b, c); // 10 2 3
+```
+
+`var` variables don't have a block scope, they are declared in the global scope when used in block statements. This is why the global `var a` changed; it was redeclared in the if statement because `var` has no block scope.
+
+ES6 introduced the `let` and `const` keywords, these keywords could declare variables within the block scope, independent of the global scope.
+
+This was an important feature because `var` declarations in block statements were still in the global scope and therefore caused problems.
+
+Another example:
+
+```js
+var a = 1;
+let b = 2;
+const c = 3;
+
+for (var a = 0; a < 10; a++) {
+  // loop scope
+  console.log(`Loop: ${a}`);
+  // Loop: 1 - 9
+}
+
+console.log(a, b, c); // 1 2 10
+```
+
+Not good. This loop scope defines `var a = 0` and therefore redeclares the global `var a`.
+
+This is why `var` sucks.
+
+This is one main reason why `let` and `const` was created!
+
+**Stop using `var`!**
