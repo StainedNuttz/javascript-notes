@@ -278,9 +278,9 @@ val = Math.random(); // Random decimal between 0 and 1
 val = Math.floor(Math.random() * 100 + 1); // Random number between 1 and 100, rounded down to an integer
 ```
 
-## String Methods
+## Strings
 
-### Simple Concatenation
+### Concatenation
 
 ```js
 const firstName = 'William';
@@ -310,26 +310,28 @@ This is useful because certain characters that define the JavaScript syntax, e.g
 val = 'That\'s awesome, I can\'t wait';
 ```
 
-### .length
+### Methods & Properties
+
+#### .length
 
 ```js
 val = firstName.length; // 7
 ```
 
-### concat()
+#### concat()
 
 ```js
 val = firstName.concat(' ', lastName); // William Johnson
 ```
 
-### Uppercase & Lowercase
+#### Uppercase & Lowercase
 
 ```js
 val = firstName.toUpperCase(); // WILLIAM
 val = firstName.toLowerCase(); // william
 ```
 
-### Indexing Strings
+#### Indexing Strings
 
 You can index strings like arrays
 
@@ -345,7 +347,7 @@ val[5] = val[5].toUpperCase(); // stays as William
 // Desired effect: WilliAm
 ```
 
-### indexOf()
+#### indexOf()
 
 Character matching is case-sensitive.
 
@@ -358,7 +360,7 @@ val = firstName.indexOf('l'); // 2 (first l in the string)
 val = firstName.lastIndexOf('l'); // 3 (last l in the string) 
 ```
 
-### charAt()
+#### charAt()
 
 Similar to indexing the string.
 
@@ -371,7 +373,7 @@ val = firstName.charAt(10); // empty string
 val = firstName.charAt(firstName.length - 1); // m
 ```
 
-### substring()
+#### substring()
 
 Extracts a section of a string
 
@@ -379,7 +381,7 @@ Extracts a section of a string
 val = firstName.substring(0, 4); // Will
 ```
 
-### slice()
+#### slice()
 
 Similar to the `substring()` method, but can use negative numbers to get the last `n` characters.
 
@@ -389,7 +391,7 @@ val = firstName.slice(1); // illiam
 val = firstName.slice(-3); // iam
 ```
 
-### split()
+#### split()
 
 Very useful method. Splits a string into an array using a separating identifier (usually spaces).
 
@@ -407,7 +409,7 @@ val = greeting.split('!'); // 0: Hello
 
 The identifier is excluded in the array.
 
-### replace()
+#### replace()
 
 Simply replaces a substring with a new substring
 
@@ -415,7 +417,7 @@ Simply replaces a substring with a new substring
 val = greeting.replace('William', 'Josef'); // Hello! My name is Josef
 ```
 
-### includes()
+#### includes()
 
 Returns whether the substring exists in a string
 
@@ -546,7 +548,225 @@ numbers.splice(1, 3); // [1, 5]
 
 #### reverse()
 
+Simply reverses the array's contents
+
 ```js
-numbers = [1, 2, 3, 4, 5];
+const numbers = [1, 2, 3, 4, 5];
 numbers.reverse(); // [5, 4, 3, 2, 1]
 ```
+
+### concat()
+
+Concatenates arrays together
+
+```js
+const numbers1 = [1, 2, 3, 4, 5];
+const numbers2 = [6, 7, 8, 9, 10];
+numbers1.concat(numbers2); // returns [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+
+### sort()
+
+```js
+const names = ['Stian', 'Sandra', 'Josef', 'Rosi', 'Mario'];
+names.sort(); // returns ['Josef', 'Mario', 'Rosi', 'Sandra', 'Stian']
+
+const numbers = [21, 32, 34, 11, 4, 121, 1945];
+numbers.sort(); // returns [11, 121, 1945, 21, 32, 34, 4] 
+```
+
+By default, the `sort()` method sorts the array's values by converting the values to strings and comparing their Unicode values.
+
+If you pass in a callback function, the `sort()` method will sort the array defined by that function.
+
+The `sort()` method calls the callback function for each array element **and** the element preceding it, so that it can compare both of them.
+
+With the callback function, you want to return either a:
+
+* negative number
+* zero
+* positive number
+
+The `sort()` method does something with those two elements determined by the return value of the callback function.
+
+`negative number = values are not swapped`
+
+`zero (same number basically) = values are not swapped but count as sorted`
+
+`positive number = values are swapped`
+
+So in conclusion, if you would `return a - b`, you're basically comparing the numbers in ascending order:
+
+* if a < b, then no swap
+* if a = b, then no swap, but count as sorted
+* if a > b, then swap
+
+Likewise for `return b - a`, you're comparing the numbers in descending order:
+
+* if b < a, then no swap
+* if b = a, then no swap, but count as sorted
+* if b > a, then swap
+
+```js
+let val;
+val = numbers.sort(function(a, b) {
+  return a - b;
+}); // val = [4, 11, 21, 32, 34, 121, 1945]
+
+val = numbers.sort(function(a, b) {
+  return b - a;
+}); // val = [1945, 121, 34, 32, 21, 11, 4]
+```
+
+`a - b` and `b - a` are the ones to remember
+
+
+### find()
+
+Finds the first value in an array, that satisfies the provided function.
+
+```js
+const ages = [2, 8, 44, 31, 5, 66];
+function over18(num) {
+  return num > 18;
+}
+
+ages.find(over18); // returns 44
+```
+
+## Object Literals
+
+Simple way to define objects and access their properties and methods.
+
+`this` is used to refer to itself when accessing properties from inside the object.
+
+```js
+const person = {
+  firstName: 'Steve';
+  age: 56;
+  email: 'steve@gmail.com';
+  hobbies: ['music', 'sports'];
+  address: {
+    city: 'Berlin',
+    houseNumber: 4
+  }
+  getBirthYear: function() {
+    return 2021 - this.age;
+  }
+}
+
+let val;
+
+val = person; // object
+val = person.firstName; // 'Steve'
+val = person['firstName'] // 'Steve'
+val = person.age; // 79
+val = person.hobbies[1]; // 'sports'
+val = person.address.city; // 'Berlin'
+val = person.getBirthYear(); // returns 1942
+```
+
+`person.firstName` is preferred over `person['firstName']`
+
+## Dates & Times
+
+Dates & times are very important in programming, JavaScript has the `Date` object which defines methods and properties for using dates & times.
+
+The default constructor for `Date` returns the current time and date.
+
+```js
+const today = new Date();
+// logs Sat Apr 03 2021 13:04:35 GMT+0100 (British Summer Time)
+```
+
+### Creating Date Objects
+
+There are many ways to create dates in JavaScript:
+
+```js
+let date = new Date('8 1 2001');
+// logs Wed Aug 01 2001 00:00:00 GMT+0100 (British Summer Time)
+
+date = new Date('8 1 2001 18:32:42');
+// logs Wed Aug 01 2001 18:32:42 GMT+0100 (British Summer Time)
+
+date = new Date('August 1 2001');
+// Wed Aug 01 2001 18:32:42 GMT+0100 (British Summer Time)
+
+date = new Date('3/4/2016');
+// logs Fri Mar 04 2016 00:00:00 GMT+0000 (Greenwich Mean Time)
+
+console.log(typeof date); // object
+```
+
+### Getting Properties
+
+Because `Date` is an object, we can access its methods!
+
+```js
+let val;
+const today = new Date();
+// Sat Apr 03 2021 13:15:42 GMT+0100 (British Summer Time)
+
+val = today.getMonth();
+// returns 3
+// getMonth() is zero-based
+
+val = today.getDate();
+// returns 3 (day of the month)
+
+val = today.getDay();
+// returns 6 (Sun-Sat (0 - 6))
+
+val = today.getFullYear();
+// returns 2021
+
+val = today.getHours();
+// 13
+
+val = today.getMinutes();
+// 22
+
+val = today.getSeconds();
+// 42
+
+val = today.getMilliseconds();
+// 821
+
+val = today.getTime();
+// 1614777647420 -> seconds since 1-1-1970 00:00:00
+```
+
+### Setting Properties
+
+We can also access the defined `set` methods to manipulate the data on a `Date` object!
+
+```js
+const birthday = new Date('August 1 2001');
+birthday.setMonth(1);
+birthday.setDate(31);
+birthday.setFullYear(1066);
+birthday.setHours(14);
+birthday.setMinutes(30);
+birthday.setSeconds(59);
+
+console.log(birthday);
+// logs: Sat Mar 03 1066 14:30:59 GMT-0001 (Greenwich Mean Time)
+```
+
+Note how `February 31st` rolls over to `March 3rd`!
+
+## Conditions
+
+### Comparisons
+
+`===` is preferred over `==` as it compares the type as well as the value, this stops issues from arising, e.g:
+
+`'100' == 100`
+> true
+
+`'100' === 100`
+> false
+
+**Recommended** to use `===` !
+
