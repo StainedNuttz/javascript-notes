@@ -425,3 +425,7 @@ val = greeting.includes('Wi'); // true
 val = greeting.includes('Wii'); // false
 val = greeting.includes('foo'); // false
 ```
+
+## Template Literals
+
+Template literals are a feature of ES6 and compatible with all modern browsers.
