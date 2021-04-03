@@ -428,4 +428,125 @@ val = greeting.includes('foo'); // false
 
 ## Template Literals
 
-Template literals are a feature of ES6 and compatible with all modern browsers.
+Template literals are a feature of ES5 and are compatible with all modern browsers.
+
+Declaring some variables
+
+```js
+const name = 'John';
+const age = 30;
+const job = 'Web Developer';
+const city = 'Miami';
+let html;
+```
+
+Without template literals (horrible):
+
+```js
+html = 
+"<ul>" +
+"<li>Name: " + name + "</li>" +
+"<li>Age: " + age + "</li>" +
+"<li>Job: " + job + "</li>" +
+"<li>City: " + city + "</li>" +
+"</ul>";
+
+document.body.innerHTML = html;
+```
+
+With template literals:
+
+```js
+html = `
+  <ul>
+    <li>Name: ${name}</li>
+    <li>Age: ${age}</li>
+    <li>Job: ${job}</li>
+    <li>City: ${city}</li>
+  </ul>
+`;
+```
+
+Temporal literal blocks are defined by back ticks.
+
+A placeholder for data is defined by:
+`${ ... }`
+
+Both of the code blocks achieve the exact same result onto the web page. Thank the lord for temporal literals!
+
+You can even input other types of data such as expressions, conditionals, calculations and much more!
+
+```js
+`<li>${2 + 2}</li>`
+`<li>${age > 18 ? 'adult' : 'child'}</li>`
+```
+
+## Arrays
+
+Arrays are very useful
+
+Arrays, just like variables, can contain anything
+
+```js
+// numbers
+const numbers = [1, 2, 3, 4, 5];
+// strings
+const cars = ['BMW', 'Audi', 'Volkswagen', 'Kia'];
+// mixed
+const mixed = ['cool', 1, null, undefined, {a:1, b:1}, true, new Date()];
+```
+
+Arrays can also be initialized by using the `Array()` constructor!
+
+```js
+const numbers2 = new Array(1, 2, 3, 4, 5);
+```
+
+### Array Methods & Properties
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+let val; // undefined
+
+val = numbers.length; // 5
+val = Array.isArray(numbers); // true
+val = numbers[0]; // 1
+val = numbers.indexOf(3); // 2
+```
+
+### Mutating Arrays
+
+Unlike strings, arrays are mutable so you can change their values by index and do other things to change up the array.
+
+#### Adding and Taking off values
+
+```js
+// Replacing a value at a specific index
+numbers[2] = 1; // [1, 2, 1, 4, 5]
+
+// Adding on
+numbers.push(6); // [1, 2, 1, 4, 5, (6)]
+numbers.unshift(0); // [(0), 1, 2, 1, 4, 5, 6]
+
+// Taking off
+numbers.pop(); // [0, 1, 2, 1, 4, 5] -> (6)
+numbers.shift(); // (0) <- [1, 2, 1, 4, 5]
+```
+
+#### splice()
+
+Removes a subarray from the array: `splice(startingPoint, endingPoint)`
+
+The starting and end points are **inclusive**.
+
+```js
+numbers = [1, 2, 3, 4, 5];
+numbers.splice(1, 3); // [1, 5]
+```
+
+#### reverse()
+
+```js
+numbers = [1, 2, 3, 4, 5];
+numbers.reverse(); // [5, 4, 3, 2, 1]
+```
