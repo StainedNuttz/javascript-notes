@@ -1,5 +1,23 @@
 # Fundamentals
 
+Content
+
+- [Fundamentals](#fundamentals)
+- [Variable Declarations](#variable-declarations)
+- [Data Types](#data-types)
+- [Converting Variables](#converting-variables)
+- [The Math Library](#the-math-library)
+- [Strings](#strings)
+- [Template Literals](#template-literals)
+- [Arrays](#arrays)
+- [Object Literals](#object-literals)
+- [Dates & Times](#dates--times)
+- [Conditions](#conditions)
+- [Functions](#functions)
+- [Loops](#loops)
+- [The Window Object](#the-window-object)
+- [Scopes](#scopes)
+
 ## Variable Declarations
 
 ### var
@@ -258,7 +276,7 @@ JavaScript sees that `val1` is a `string` and therefore decides to convert `val2
 
 ## The Math Library
 
-The Math library has many useful methods.
+The Math library has many useful methods and properties.
 
 ```js
 let val;
